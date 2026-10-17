@@ -1,7 +1,14 @@
 import axios from 'axios';
 
+// Supports VITE_API_URL for production (Render backend), with automatic Render fallback in production and /api for local dev
+const apiBase =
+  import.meta.env.VITE_API_URL ||
+  (import.meta.env.PROD
+    ? 'https://mern-todo-app-79tf.onrender.com/api'
+    : '/api');
+
 const api = axios.create({
-  baseURL: '/api',
+  baseURL: apiBase,
   headers: {
     'Content-Type': 'application/json',
   },
